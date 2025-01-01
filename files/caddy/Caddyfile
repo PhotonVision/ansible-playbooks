@@ -1,0 +1,41 @@
+vps.photonvision.org {
+    root * /var/www/html/photonvision-website
+    file_server
+}
+
+javadocs.vps.photonvision.org {
+    root * /var/www/html/photonvision-docs/built-docs/javadoc
+    file_server
+}
+
+apidocs.vps.photonvision.org {
+    root * /var/www/html/photonvision-docs-landing
+    file_server
+}
+
+cppdocs.vps.photonvision.org {
+    root * /var/www/html/photonvision-docs/built-docs/doxygen/html
+    file_server
+}
+
+demo.vps.photonvision.org {
+    root * /var/www/html/photonvision-docs/built-client
+    file_server
+}
+
+maven.vps.photonvision.org {
+
+    reverse_proxy localhost:8082 {
+        header_up X-Forwarded-Proto ${scheme}
+    }
+
+    @internal {
+        path_regexp internal ^/repository/internal/(.*)
+    }
+    redir @internal /releases/{http.regexp.internal.1}
+
+    @snapshots {
+        path_regexp snapshots ^/repository/snapshots/(.*)
+    }
+    redir @snapshots /snapshots/{http.regexp.snapshots.1}
+}

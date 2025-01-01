@@ -23,6 +23,8 @@
           - python3-pip
           - virtualenv
           - python3-setuptools
+          - debian-keyring
+          - debian-archive-keyring
         state: latest
      become: true
 
