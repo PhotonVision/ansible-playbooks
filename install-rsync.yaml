@@ -1,0 +1,64 @@
+---
+- name: Install rsync service
+  hosts: maven-servers
+  become: true
+
+  handlers:
+    - name: restart_rsync
+      service:
+        name: rsync
+        state: restarted
+
+    - name: reload_systemd
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+
+
+  tasks:
+    # From https://peterbabic.dev/blog/how-to-install-caddy-using-ansible/
+    - name: Install required packages
+      apt:
+        update_cache: yes
+        name:
+          - rsync
+        state: present
+
+    - name: Create systemd service file for rsync
+      copy:
+        dest: /etc/systemd/system/rsync.service
+        content: |
+          [Unit]
+          Description=Rsync Service
+          After=network.target
+
+          [Service]
+          ExecStart=/usr/bin/rsync --daemon --no-detach
+          Restart=always
+
+          [Install]
+          WantedBy=multi-user.target
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - reload_systemd
+
+    - name: Enable and start rsync service
+      service:
+        name: rsync
+        state: started
+        enabled: yes
+
+    - name: Copy rsyncd config
+      copy:
+        src: files/rsyncd_docker/rsyncd.conf
+        dest: /etc/rsyncd.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - restart_rsync
+
+    - name: Show results
+      ansible.builtin.debug:
+       var: output
