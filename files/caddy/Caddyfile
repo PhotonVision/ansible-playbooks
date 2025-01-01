@@ -1,29 +1,29 @@
-vps.photonvision.org {
+photonvision.org {
     root * /var/www/html/photonvision-website
     file_server
 }
 
-javadocs.vps.photonvision.org {
+javadocs.photonvision.org {
     root * /var/www/html/photonvision-docs/built-docs/javadoc
     file_server
 }
 
-apidocs.vps.photonvision.org {
+apidocs.photonvision.org {
     root * /var/www/html/photonvision-docs-landing
     file_server
 }
 
-cppdocs.vps.photonvision.org {
+cppdocs.photonvision.org {
     root * /var/www/html/photonvision-docs/built-docs/doxygen/html
     file_server
 }
 
-demo.vps.photonvision.org {
+demo.photonvision.org {
     root * /var/www/html/photonvision-docs/built-client
     file_server
 }
 
-maven.vps.photonvision.org {
+maven.photonvision.org {
 
     reverse_proxy localhost:8082 {
         header_up X-Forwarded-Proto ${scheme}

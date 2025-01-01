@@ -56,3 +56,9 @@
         mode: 0755
       notify:
         - restart_caddy
+
+    - name: Ensure /var/www/html is owned by ghactions
+      ansible.builtin.file:
+        path: /var/www/html
+        owner: ghactions
+        recurse: yes
