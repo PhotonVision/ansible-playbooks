@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  # rsyncd:
+  #   image: rsync-server
+  #   volumes:
+  #     - type: bind
+  #       source: /opt/docker/data/reposilite-data/
+  #       target: /mnt/reposilite-data:ro
+  #     - type: bind
+  #       source: /home/mcm001/rsyncd_docker/rsyncd.conf
+  #       target: /etc/rsyncd.conf:ro
+  #   ports:
+  #     - 873:873
+  #   restart: always
+
+  reposilite:
+    image: dzikoysk/reposilite:3.5.12
+    volumes:
+      - type: bind 
+        source: /opt/docker/data/reposilite-data/
+        target: /app/data
+    ports:
+      - 8082:8080
+    restart: always
