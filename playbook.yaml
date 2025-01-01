@@ -6,7 +6,7 @@
      apt:
        update_cache: yes
 
-# from https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04#step-4-adding-docker-image-and-container-tasks-to-your-playbook
+   # from https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04#step-4-adding-docker-image-and-container-tasks-to-your-playbook
    - name: Install aptitude
      apt:
         name: aptitude
@@ -62,14 +62,22 @@
         state: started
         enabled: yes
 
+   - name: Copy reposilite folder over
+     copy:
+        src: files/reposilite
+        dest: /home/ghactions
+        owner: ghactions
+        group: ghactions
+        mode: 0755
+
    - name: Tear down existing services
      community.docker.docker_compose_v2:
-       project_src: reposilite
+       project_src: /home/ghactions/reposilite
        state: absent
 
    - name: Create and start services
      community.docker.docker_compose_v2:
-       project_src: reposilite
+       project_src: /home/ghactions/reposilite
      register: output
 
    - name: Show results
