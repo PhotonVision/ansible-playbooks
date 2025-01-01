@@ -7,12 +7,6 @@
        update_cache: yes
 
    # from https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04#step-4-adding-docker-image-and-container-tasks-to-your-playbook
-   - name: Install aptitude
-     apt:
-        name: aptitude
-        state: latest
-     become: true
-
    - name: Install required system packages
      apt:
         pkg:
