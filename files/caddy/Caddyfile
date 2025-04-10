@@ -4,10 +4,13 @@ photonvision.org {
 }
 
 javadocs.photonvision.org {
-    @root {
+    	@root {
 		path /
 	}
+
 	redir @root /release
+
+	redir /org/{uri} /release/org/{uri}
 
 	# Serve /release and /development from local directories
 	handle_path /release* {
@@ -23,9 +26,10 @@ javadocs.photonvision.org {
 
 cppdocs.photonvision.org {
 
-    @root {
+    	@root {
 		path /
 	}
+
 	redir @root /release
 
 	# Serve /release and /development from local directories
