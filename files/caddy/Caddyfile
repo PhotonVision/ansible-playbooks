@@ -19,7 +19,7 @@ javadocs.photonvision.org {
 }
 
 cppdocs.photonvision.org {
-        redir / /release/
+    redir / /release/
 
     # Serve /release and /development from local directories
     handle_path /release/* {
