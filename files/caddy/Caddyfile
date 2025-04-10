@@ -4,58 +4,57 @@ photonvision.org {
 }
 
 javadocs.photonvision.org {
-    	@root {
-		path /
-	}
+    @root {
+        path /
+    }
 
-	redir @root /release
+    redir @root /release
 
-	@notReleaseOrDev {
-		not path /release/* /development/*
-	}
+    @notReleaseOrDev {
+        not path /release/* /development/*
+    }
 
-	handle @notReleaseOrDev {
-		redir /release{uri}
-	}
+    handle @notReleaseOrDev {
+        redir /release{uri}
+    }
 
-	# Serve /release and /development from local directories
-	handle_path /release* {
-		root * /var/www/html/photonvision-docs/release/built-docs/javadoc
-		file_server
-	}
+    # Serve /release and /development from local directories
+    handle_path /release* {
+        root * /var/www/html/photonvision-docs/release/built-docs/javadoc
+        file_server
+    }
 
-	handle_path /development* {
-		root * /var/www/html/photonvision-docs/development/built-docs/javadoc
-		file_server
-	}
+    handle_path /development* {
+        root * /var/www/html/photonvision-docs/development/built-docs/javadoc
+        file_server
+    }
 }
 
 cppdocs.photonvision.org {
+    @root {
+        path /
+    }
 
-    	@root {
-		path /
-	}
+    redir @root /release
 
-	redir @root /release
+    @notReleaseOrDev {
+        not path /release/* /development/*
+    }
 
-	@notReleaseOrDev {
-		not path /release/* /development/*
-	}
+    handle @notReleaseOrDev {
+        redir /release{uri}
+    }
 
-	handle @notReleaseOrDev {
-		redir /release{uri}
-	}
+    # Serve /release and /development from local directories
+    handle_path /release* {
+        root * /var/www/html/photonvision-docs/release/built-docs/doxygen/html
+        file_server
+    }
 
-	# Serve /release and /development from local directories
-	handle_path /release* {
-		root * /var/www/html/photonvision-docs/release/built-docs/doxygen/html
-		file_server
-	}
-
-	handle_path /development* {
-		root * /var/www/html/photonvision-docs/development/built-docs/doxygen/html
-		file_server
-	}
+    handle_path /development* {
+        root * /var/www/html/photonvision-docs/development/built-docs/doxygen/html
+        file_server
+    }
 }
 
 demo.photonvision.org {
