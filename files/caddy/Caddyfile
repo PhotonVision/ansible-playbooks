@@ -11,12 +11,12 @@ javadocs.photonvision.org {
 
 	# Serve /stable and /latest from local directories
 	handle_path /stable* {
-		root * /var/www/html/photonvision-docs/stable/built-docs/javadoc/html
+		root * /var/www/html/photonvision-docs/stable/built-docs/javadoc
 		file_server
 	}
 
 	handle_path /latest* {
-		root * /var/www/html/photonvision-docs/latest/built-docs/javadoc/html
+		root * /var/www/html/photonvision-docs/latest/built-docs/javadoc
 		file_server
 	}
 }
