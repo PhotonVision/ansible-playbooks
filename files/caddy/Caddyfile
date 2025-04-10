@@ -4,18 +4,40 @@ photonvision.org {
 }
 
 javadocs.photonvision.org {
-    root * /var/www/html/photonvision-docs/built-docs/javadoc
-    file_server
-}
+    @root {
+		path /
+	}
+	redirect @root /stable
 
-apidocs.photonvision.org {
-    root * /var/www/html/photonvision-docs-landing
-    file_server
+	# Serve /stable and /latest from local directories
+	handle_path /stable* {
+		root * /var/www/html/photonvision-docs/stable/built-docs/javadoc/html
+		file_server
+	}
+
+	handle_path /latest* {
+		root * /var/www/html/photonvision-docs/latest/built-docs/javadoc/html
+		file_server
+	}
 }
 
 cppdocs.photonvision.org {
-    root * /var/www/html/photonvision-docs/built-docs/doxygen/html
-    file_server
+
+    @root {
+		path /
+	}
+	redirect @root /stable
+
+	# Serve /stable and /latest from local directories
+	handle_path /stable* {
+		root * /var/www/html/photonvision-docs/stable/built-docs/doxygen/html
+		file_server
+	}
+
+	handle_path /latest* {
+		root * /var/www/html/photonvision-docs/latest/built-docs/doxygen/html
+		file_server
+	}
 }
 
 demo.photonvision.org {
