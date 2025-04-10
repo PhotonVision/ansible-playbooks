@@ -7,16 +7,16 @@ javadocs.photonvision.org {
     @root {
 		path /
 	}
-	redirect @root /stable
+	redirect @root /release
 
-	# Serve /stable and /latest from local directories
-	handle_path /stable* {
-		root * /var/www/html/photonvision-docs/stable/built-docs/javadoc
+	# Serve /release and /development from local directories
+	handle_path /release* {
+		root * /var/www/html/photonvision-docs/release/built-docs/javadoc
 		file_server
 	}
 
-	handle_path /latest* {
-		root * /var/www/html/photonvision-docs/latest/built-docs/javadoc
+	handle_path /development* {
+		root * /var/www/html/photonvision-docs/development/built-docs/javadoc
 		file_server
 	}
 }
@@ -26,16 +26,16 @@ cppdocs.photonvision.org {
     @root {
 		path /
 	}
-	redirect @root /stable
+	redirect @root /release
 
-	# Serve /stable and /latest from local directories
-	handle_path /stable* {
-		root * /var/www/html/photonvision-docs/stable/built-docs/doxygen/html
+	# Serve /release and /development from local directories
+	handle_path /release* {
+		root * /var/www/html/photonvision-docs/release/built-docs/doxygen/html
 		file_server
 	}
 
-	handle_path /latest* {
-		root * /var/www/html/photonvision-docs/latest/built-docs/doxygen/html
+	handle_path /development* {
+		root * /var/www/html/photonvision-docs/development/built-docs/doxygen/html
 		file_server
 	}
 }
