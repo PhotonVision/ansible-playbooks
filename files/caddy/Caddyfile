@@ -10,7 +10,13 @@ javadocs.photonvision.org {
 
 	redir @root /release
 
-	redir /org/{uri} /release/org/{uri}
+	@notReleaseOrDev {
+		not path /release/* /development/*
+	}
+
+	handle @notReleaseOrDev {
+		redir /release{uri}
+	}
 
 	# Serve /release and /development from local directories
 	handle_path /release* {
@@ -31,6 +37,14 @@ cppdocs.photonvision.org {
 	}
 
 	redir @root /release
+
+	@notReleaseOrDev {
+		not path /release/* /development/*
+	}
+
+	handle @notReleaseOrDev {
+		redir /release{uri}
+	}
 
 	# Serve /release and /development from local directories
 	handle_path /release* {
