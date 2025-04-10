@@ -1,5 +1,5 @@
 photonvision.org {
-    root * /var/www/html/photonvision-website
+    root * /var/www/html/photonvision-website/dist
     file_server
 }
 
