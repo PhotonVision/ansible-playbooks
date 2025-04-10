@@ -7,7 +7,7 @@ javadocs.photonvision.org {
     @root {
 		path /
 	}
-	redirect @root /release
+	redir @root /release
 
 	# Serve /release and /development from local directories
 	handle_path /release* {
@@ -26,7 +26,7 @@ cppdocs.photonvision.org {
     @root {
 		path /
 	}
-	redirect @root /release
+	redir @root /release
 
 	# Serve /release and /development from local directories
 	handle_path /release* {
