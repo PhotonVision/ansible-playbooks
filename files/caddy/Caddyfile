@@ -54,3 +54,7 @@ maven.photonvision.org {
     }
     redir @snapshots /snapshots/{http.regexp.snapshots.1}
 }
+
+pro.photonvision.org {
+    redir https://github.com/PhotonVision/photonvision/releases/tag/v2021.1.4
+}
