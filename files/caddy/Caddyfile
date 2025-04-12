@@ -35,6 +35,21 @@ cppdocs.photonvision.org {
     }
 }
 
+pydocs.photonvision.org {
+	redir / /release/
+
+	#Serve /release and /development from local directories
+	handle_path /release/* {
+		root * /var/www/html/photonvision-docs/release/docs-python
+		file_server
+	}
+
+	handle_path /development/* {
+		root * /var/www/html/photonvision-docs/development/docs-python
+		file_server
+	}
+}
+
 demo.photonvision.org {
     root * /var/www/html/photonvision-demo
     file_server
