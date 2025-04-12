@@ -3,6 +3,10 @@ photonvision.org {
     file_server
 }
 
+www.photonvision.org {
+    redir https://photonvision.org{uri}
+}
+
 javadocs.photonvision.org {
     redir / /release/ 302
 
