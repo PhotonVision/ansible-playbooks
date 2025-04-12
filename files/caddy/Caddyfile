@@ -4,7 +4,9 @@ photonvision.org {
 }
 
 javadocs.photonvision.org {
-    redir / /release/
+    redir / /release/ 302
+
+    redir /org* /release{uri} 302
 
     # Serve /release and /development from local directories
     handle_path /release/* {
@@ -53,8 +55,4 @@ maven.photonvision.org {
         path_regexp snapshots ^/repository/snapshots/(.*)
     }
     redir @snapshots /snapshots/{http.regexp.snapshots.1}
-}
-
-pro.photonvision.org {
-    redir https://github.com/PhotonVision/photonvision/releases/tag/v2021.1.4
 }
