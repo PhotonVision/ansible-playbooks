@@ -8,20 +8,20 @@ www.photonvision.org {
 }
 
 javadocs.photonvision.org {
-    redir / /release/ 302
-
     redir /org* /release{uri} 302
 
     # Serve /release and /development from local directories
     handle_path /release/* {
-        root * /var/www/html/photonvision-docs/release/javadoc
+        root * /var/www/html/photonvision-docs/release/docs-java-cpp/javadoc
         file_server
     }
 
     handle_path /development/* {
-        root * /var/www/html/photonvision-docs/development/javadoc
+        root * /var/www/html/photonvision-docs/development/docs-java-cpp/javadoc
         file_server
     }
+
+    redir / /release/ 302
 }
 
 cppdocs.photonvision.org {
@@ -29,29 +29,29 @@ cppdocs.photonvision.org {
 
     # Serve /release and /development from local directories
     handle_path /release/* {
-        root * /var/www/html/photonvision-docs/release/doxygen/html
+        root * /var/www/html/photonvision-docs/release/docs-java-cpp/doxygen/html
         file_server
     }
 
     handle_path /development/* {
-        root * /var/www/html/photonvision-docs/development/doxygen/html
+        root * /var/www/html/photonvision-docs/development/docs-java-cpp/doxygen/html
         file_server
     }
 }
 
 pydocs.photonvision.org {
-	redir / /release/
+    redir / /release/
 
-	#Serve /release and /development from local directories
-	handle_path /release/* {
-		root * /var/www/html/photonvision-docs/release/docs-python
-		file_server
-	}
+    #Serve /release and /development from local directories
+    handle_path /release/* {
+        root * /var/www/html/photonvision-docs/release/docs-python
+        file_server
+    }
 
-	handle_path /development/* {
-		root * /var/www/html/photonvision-docs/development/docs-python
-		file_server
-	}
+    handle_path /development/* {
+        root * /var/www/html/photonvision-docs/development/docs-python
+        file_server
+    }
 }
 
 demo.photonvision.org {
@@ -60,7 +60,6 @@ demo.photonvision.org {
 }
 
 maven.photonvision.org {
-
     reverse_proxy localhost:8082 {
         header_up X-Forwarded-Proto ${scheme}
     }
