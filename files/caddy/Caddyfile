@@ -1,76 +1,70 @@
 photonvision.org {
-    root * /var/www/html/photonvision-website
-    file_server
+        root * /var/www/html/photonvision-website
+        file_server
 }
 
 www.photonvision.org {
-    redir https://photonvision.org{uri}
+        redir https://photonvision.org{uri}
+}
+
+(versioned_docs) {
+        # args:
+        # {args[0]} = docs subdir (under /var/www/html/photonvision-docs)
+
+        vars {
+                docs_root /var/www/html/photonvision-docs
+        }
+
+        redir /release /release/ 308
+        redir /development /development/ 308
+
+        handle_path /release/* {
+                root * {vars.docs_root}/release/{args[0]}
+                file_server
+        }
+
+        handle_path /development/* {
+                root * {vars.docs_root}/development/{args[0]}
+                file_server
+        }
 }
 
 javadocs.photonvision.org {
-    redir /org* /release{uri} 302
+        redir /org* /release{uri} 302
+        redir / /release/ 302
 
-    # Serve /release and /development from local directories
-    handle_path /release/* {
-        root * /var/www/html/photonvision-docs/release/docs-java-cpp/javadoc
-        file_server
-    }
-
-    handle_path /development/* {
-        root * /var/www/html/photonvision-docs/development/docs-java-cpp/javadoc
-        file_server
-    }
-
-    redir / /release/ 302
+        import versioned_docs javadoc
 }
 
 cppdocs.photonvision.org {
-    redir / /release/
+        redir / /release/ 302
 
-    # Serve /release and /development from local directories
-    handle_path /release/* {
-        root * /var/www/html/photonvision-docs/release/docs-java-cpp/doxygen/html
-        file_server
-    }
-
-    handle_path /development/* {
-        root * /var/www/html/photonvision-docs/development/docs-java-cpp/doxygen/html
-        file_server
-    }
+        import versioned_docs doxygen/html
 }
 
 pydocs.photonvision.org {
-    redir / /release/
+        redir / /release/ 302
 
-    #Serve /release and /development from local directories
-    handle_path /release/* {
-        root * /var/www/html/photonvision-docs/release/docs-python
-        file_server
-    }
-
-    handle_path /development/* {
-        root * /var/www/html/photonvision-docs/development/docs-python
-        file_server
-    }
+        import versioned_docs docs-python
 }
 
 demo.photonvision.org {
-    root * /var/www/html/photonvision-demo
-    file_server
+        root * /var/www/html/photonvision-demo
+        file_server
 }
 
 maven.photonvision.org {
-    reverse_proxy localhost:8082 {
-        header_up X-Forwarded-Proto ${scheme}
-    }
+        reverse_proxy localhost:8082 {
+                header_up X-Forwarded-Proto ${scheme}
+        }
 
-    @internal {
-        path_regexp internal ^/repository/internal/(.*)
-    }
-    redir @internal /releases/{http.regexp.internal.1}
+        @internal {
+                path_regexp internal ^/repository/internal/(.*)
+        }
+        redir @internal /releases/{http.regexp.internal.1}
 
-    @snapshots {
-        path_regexp snapshots ^/repository/snapshots/(.*)
-    }
-    redir @snapshots /snapshots/{http.regexp.snapshots.1}
+        @snapshots {
+                path_regexp snapshots ^/repository/snapshots/(.*)
+        }
+        redir @snapshots /snapshots/{http.regexp.snapshots.1}
 }
